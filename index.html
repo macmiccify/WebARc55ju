@@ -5,6 +5,7 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
         <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.1/howler.min.js"></script>
         <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
         <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
         <script>
@@ -23,6 +24,16 @@
                     }.bind(this));
                 },
             });
+        </script>
+        <script>
+            var sound = new Howl({
+            src="assets/voice/meetingroom.mp3",
+            volume: 1.0,
+            onend: function () {
+            alert('We finished with the setup!');
+            }
+            });
+            sound.play()
         </script>
     </head>
 
@@ -51,8 +62,6 @@
                     muted
                     playsinline
                 ></video>
-                <audio id="meetingroom" src="assets/voice/meetingroom.mp3" preload="auto">
-                </audio>
             </a-assets>
             <a-marker
                 type="pattern"
@@ -76,17 +85,9 @@
                     class="clickable"
                     gesture-handler
                 ></a-video>
-                <a-sound id ="background-sound" src="#meetingroom" on="start"></a-sound>
+                sound.play();
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
-        <div class="glitchButton on-top" style="position:fixed;top:20px;right:20px;"></div>
-    <script defer>
-      document.querySelector('#btn-start').onclick = () => {
-        document.querySelector('#start-screen').classList.add('hidden');
-        document.querySelector('#background-sound').emit('start')
-      }
-    </script>
-    <script src="https://button.glitch.me/button.js" defer></script>
     </body>
 </html>
