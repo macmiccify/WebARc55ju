@@ -48,6 +48,7 @@
                     muted
                     playsinline
                 ></video>
+                <audio id="meetingroom" src="assets/voice/meetingroom.mp3" preload="auto"></audio>
             </a-assets>
             <a-marker
                 type="pattern"
@@ -71,6 +72,7 @@
                     class="clickable"
                     gesture-handler
                 ></a-video>
+                <a-entity sound="src:#meetingroom"></a-entity>
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
