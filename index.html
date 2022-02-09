@@ -12,13 +12,10 @@
                 init: function () {
                     var marker = this.el;
                     this.vid = document.querySelector("#vid");
-
-
                     marker.addEventListener('markerFound', function () {
                         this.toggle = true;
                         this.vid.play();
                     }.bind(this));
-
                     marker.addEventListener('markerLost', function () {
                         this.toggle = false;
                         this.vid.pause();
@@ -51,11 +48,7 @@
                     muted
                     playsinline
                 ></video>
-                <audio id="aud" loop muted autoplay="autoplay"> 
-                    <source src="assets/voice/meetingroom.mp3" type="audio/mp3">
-                </audio>
             </a-assets>
-
             <a-marker
                 type="pattern"
                 preset="custom"
@@ -78,9 +71,8 @@
                     class="clickable"
                     gesture-handler
                 ></a-video>
-                <a-entity sound="#aud; volume: 5; autoplay: true; loop: true"></a-entity>
+                <a-sound src="assets/voice/meetingroom.mp3" autoplay="true"></a-sound>
             </a-marker>
-
             <a-entity camera></a-entity>
         </a-scene>
     </body>
