@@ -12,20 +12,17 @@
                 init: function () {
                     var marker = this.el;
                     this.vid = document.querySelector("#vid");
-                    this.aud = document.querySelector("#aud");
+
 
                     marker.addEventListener('markerFound', function () {
                         this.toggle = true;
                         this.vid.play();
-                        this.aud.play();
                     }.bind(this));
 
                     marker.addEventListener('markerLost', function () {
                         this.toggle = false;
                         this.vid.pause();
-                        this.aud.pause();
                         this.vid.currentTime = 0;
-                        this.aud.currentTime = 0;
                     }.bind(this));
                 },
             });
