@@ -27,6 +27,9 @@
     </head>
 
     <body style="margin: 0; overflow: hidden;">
+        <div id="start-screen" class="on-top fullscreen">
+        <button id="btn-start">Click to start</button>
+        </div>
         <a-scene
             vr-mode-ui="enabled: false"
             loading-screen="enabled: false;"
@@ -73,9 +76,17 @@
                     class="clickable"
                     gesture-handler
                 ></a-video>
-                <a-sound src="#meetingroom; autoplay=true"></a-sound>
+                <a-sound id ="background-sound" src="#meetingroom" on="start"></a-sound>
             </a-marker>
             <a-entity camera></a-entity>
         </a-scene>
+        <div class="glitchButton on-top" style="position:fixed;top:20px;right:20px;"></div>
+    <script defer>
+      document.querySelector('#btn-start').onclick = () => {
+        document.querySelector('#start-screen').classList.add('hidden');
+        document.querySelector('#background-sound').emit('start')
+      }
+    </script>
+    <script src="https://button.glitch.me/button.js" defer></script>
     </body>
 </html>
