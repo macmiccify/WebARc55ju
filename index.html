@@ -15,17 +15,26 @@
                     marker.addEventListener('markerFound', function () {
                         this.toggle = true;
                         this.vid.play();
-                        this.aud.play();
                     }.bind(this));
                     marker.addEventListener('markerLost', function () {
                         this.toggle = false;
                         this.vid.pause();
-                        this.aud.pause();
                         this.vid.currentTime = 0;
                     }.bind(this));
                 },
             });
         </script>
+        <script>
+            AFRAME.registerComponent('soundhandler',{
+                tick: function() {
+                    var entity = document.querySelector('[sound]');
+                    if(document.querySelector('a-marker').object3D.visible==true){
+                        entity.components.sound.playSound();
+                    } else{
+                        entity.components.sound.pauseSound();
+                    }
+                }
+            });
     </head>
 
     <body style="margin: 0; overflow: hidden;">
@@ -51,16 +60,9 @@
                     playsinline
                 ></video>
                 <audio 
-                       id="meetingroom" 
+                       id="sound" 
                        src="assets/voice/meetingroom.mp3" 
                        preload="auto"
-                       response-type="arraybuffer"
-                       loop
-                       crossorigin
-                       webkit-playsinline
-                       autoplay
-                       muted
-                       playsinline
                   ></audio>
             </a-assets>
             <a-marker
@@ -85,8 +87,10 @@
                     class="clickable"
                     gesture-handler
                 ></a-video>
-                <a-entity sound="src:#meetingroom"></a-entity>
+             <a-box position='0 0.5 0' material='color: black;' soundhandler> 
+                </a-box>
             </a-marker>
+            <a-entity sound="src:#sound" autoplay="false"></a-entity>
             <a-entity camera></a-entity>
         </a-scene>
     </body>
